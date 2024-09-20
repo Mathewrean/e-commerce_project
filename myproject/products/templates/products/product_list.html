@@ -1,0 +1,25 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/custom.css' %}">
+
+<div class="container mt-5" style="background: linear-gradient(45deg, #ff9a9e, #fad0c4, #fad0c4, #ffdde1); min-height: 100vh;">
+    <h1 class="text-center">Product List</h1>
+    <div class="row">
+        {% for product in products %}
+            <div class="col-md-6">
+                <div class="card mb-4">
+                    {% if product.image %}
+                        <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+                    {% else %}
+                        <img src="{% static 'images/default-product-image.jpg' %}" class="card-img-top" alt="{{ product.name }}">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        <p class="card-text">{{ product.description }}</p>
+                        <p class="card-text"><strong>${{ product.price }}</strong></p>
+                        <a href="{% url 'add_to_cart' product.id %}" class="btn btn-primary">Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
